@@ -1,0 +1,13 @@
+{
+    "name": "ddmtechdev/rbac",
+    "description": "RBAC Management Module",
+    "type": "yii2-extension",
+    "require": {
+        "yiisoft/yii2": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "ddmtechdev\\rbac\\": ""
+        }
+    }
+}
