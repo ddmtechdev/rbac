@@ -1,6 +1,9 @@
 <?php
 namespace ddmtechdev\rbac\console;
-
+use ddmtechdev\rbac\models\AuthAssignment;
+use ddmtechdev\rbac\models\AuthItem;
+use ddmtechdev\rbac\models\AuthItemChild;
+use ddmtechdev\rbac\models\AuthRule;
 use Yii;
 use yii\console\Controller;
 

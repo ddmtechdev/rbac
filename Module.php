@@ -1,6 +1,7 @@
 <?php
 namespace ddmtechdev\rbac;
 
+use Yii;
 use yii\base\Module as BaseModule;
 
 class Module extends BaseModule
@@ -10,5 +11,10 @@ class Module extends BaseModule
     public function init()
     {
         parent::init();
+        Yii::$app->setComponents([
+            'authManager' => [
+                'class' => 'yii\rbac\DbManager',
+            ],
+        ]);
     }
 }
