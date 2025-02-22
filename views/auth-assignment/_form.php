@@ -7,6 +7,23 @@ use kartik\select2\Select2;
 /** @var yii\web\View $this */
 /** @var ddmtechdev\rbac\models\AuthAssignment $model */
 /** @var yii\widgets\ActiveForm $form */
+
+$this->registerJs(
+    "
+    document.getElementById('access-assignment-form').addEventListener('submit', function (e) {
+        var selectedRoles = $('#selected-roles').val(); 
+        if (!selectedRoles || selectedRoles.length === 0) {
+            alert('Please select at least one role.');
+            $('#selected-roles').next('.select2').find('.select2-selection').addClass('is-invalid');
+            e.preventDefault();
+            e.stopImmediatePropagation();
+            return false; 
+        } else {
+            $('#selected-roles').next('.select2').find('.select2-selection').removeClass('is-invalid');
+        }
+    });
+"
+);
 ?>
 <div class="auth-assignment-form">
     <div class="container mt-3">
@@ -15,18 +32,26 @@ use kartik\select2\Select2;
         </div>
         <div class="card shadow-lg" style="border-top: 7px solid #747474;">
             <div class="card-body">
-                <?php $form = ActiveForm::begin(); ?>
-                <?= $form->field($model, 'item_name')->widget(Select2::class, [
-                    'data' => [
-                        'option1' => 'Option 1',
-                        'option2' => 'Option 2',
-                        'option3' => 'Option 3',
-                    ],
-                    'options' => ['multiple' => true, 'placeholder' => 'Select item...'],
-                ]) ?>
+                <?php $form = ActiveForm::begin([
+                    'id' => 'access-assignment-form',
+                    'method' => 'post',
+                    'enableClientValidation' => false,
+                    'enableAjaxValidation' => false,
+                ]); ?>
+
+                <?= Select2::widget([
+                    'name' => 'selected_roles',
+                    'value' => $assigned_roles,
+                    'data' => $roles,
+                    'options' => [
+                        'id' => 'selected-roles', 
+                        'multiple' => true, 
+                        'placeholder' => 'Select ...'
+                    ]
+                ]); ?>
 
                 <div class="form-group">
-                    <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+                    <?= Html::submitButton('Save', ['class' => 'btn btn-success mt-2']) ?>
                 </div>
 
                 <?php ActiveForm::end(); ?>

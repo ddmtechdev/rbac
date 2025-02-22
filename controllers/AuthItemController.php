@@ -8,14 +8,9 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
-/**
- * AuthItemController implements the CRUD actions for AuthItem model.
- */
 class AuthItemController extends Controller
 {
-    /**
-     * @inheritDoc
-     */
+
     public function behaviors()
     {
         return array_merge(
@@ -31,11 +26,6 @@ class AuthItemController extends Controller
         );
     }
 
-    /**
-     * Lists all AuthItem models.
-     *
-     * @return string
-     */
     public function actionIndex()
     {
         $searchModel = new AuthItemSearch();
@@ -47,12 +37,6 @@ class AuthItemController extends Controller
         ]);
     }
 
-    /**
-     * Displays a single AuthItem model.
-     * @param string $name Name
-     * @return string
-     * @throws NotFoundHttpException if the model cannot be found
-     */
     public function actionView($name)
     {
         return $this->render('view', [
@@ -60,11 +44,6 @@ class AuthItemController extends Controller
         ]);
     }
 
-    /**
-     * Creates a new AuthItem model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
-     * @return string|\yii\web\Response
-     */
     public function actionCreate($role)
     {
         $model = new AuthItem();
@@ -73,7 +52,7 @@ class AuthItemController extends Controller
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'name' => $model->name]);
+                return $this->redirect(['index']);
             }
         } else {
             $model->loadDefaultValues();
@@ -85,20 +64,13 @@ class AuthItemController extends Controller
         ]);
     }
 
-    /**
-     * Updates an existing AuthItem model.
-     * If update is successful, the browser will be redirected to the 'view' page.
-     * @param string $name Name
-     * @return string|\yii\web\Response
-     * @throws NotFoundHttpException if the model cannot be found
-     */
     public function actionUpdate($name)
     {
         $model = $this->findModel($name);
         $role_type = $model->type == 1 ? 'Role' : 'Permission';
 
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'name' => $model->name]);
+            return $this->redirect(['index']);
         }
 
         return $this->render('update', [
@@ -107,13 +79,6 @@ class AuthItemController extends Controller
         ]);
     }
 
-    /**
-     * Deletes an existing AuthItem model.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param string $name Name
-     * @return \yii\web\Response
-     * @throws NotFoundHttpException if the model cannot be found
-     */
     public function actionDelete($name)
     {
         $this->findModel($name)->delete();
@@ -121,13 +86,6 @@ class AuthItemController extends Controller
         return $this->redirect(['index']);
     }
 
-    /**
-     * Finds the AuthItem model based on its primary key value.
-     * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param string $name Name
-     * @return AuthItem the loaded model
-     * @throws NotFoundHttpException if the model cannot be found
-     */
     protected function findModel($name)
     {
         if (($model = AuthItem::findOne(['name' => $name])) !== null) {
