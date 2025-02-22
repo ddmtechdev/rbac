@@ -7,6 +7,7 @@ use ddmtechdev\rbac\models\searches\AuthItemChildSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\filters\AccessControl;
 
 /**
  * AuthItemChildController implements the CRUD actions for AuthItemChild model.
@@ -25,6 +26,18 @@ class AuthItemChildController extends Controller
                     'class' => VerbFilter::className(),
                     'actions' => [
                         'delete' => ['POST'],
+                    ],
+                ],
+                'access' => [
+                    'class' => AccessControl::class,
+                    'rules' => [
+                        [
+                            'allow' => true,
+                            'roles' => ['admin'], // Only allow admin to access all actions
+                        ],
+                        [
+                            'allow' => false, // Deny access to others
+                        ],
                     ],
                 ],
             ]
