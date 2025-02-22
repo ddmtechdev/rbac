@@ -3,6 +3,7 @@
 namespace ddmtechdev\rbac\models;
 
 use Yii;
+use ddmtechdev\user\models\User;
 
 /**
  * This is the model class for table "auth_assignment".
@@ -52,14 +53,14 @@ class AuthAssignment extends \yii\db\ActiveRecord
         ];
     }
 
-    /**
-     * Gets query for [[ItemName]].
-     *
-     * @return \yii\db\ActiveQuery
-     */
     public function getItemName()
     {
         return $this->hasOne(AuthItem::class, ['name' => 'item_name']);
+    }
+
+    public function getUser()
+    {
+        return $this->hasOne(User::class, ['id' => 'user_id']);
     }
 
 }

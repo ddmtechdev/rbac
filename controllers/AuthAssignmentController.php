@@ -91,9 +91,9 @@ class AuthAssignmentController extends Controller
      * @return string|\yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionUpdate($item_name, $user_id)
+    public function actionUpdate($user_id)
     {
-        $model = $this->findModel($item_name, $user_id);
+        $model = $this->findModel($user_id);
 
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
             return $this->redirect(['view', 'item_name' => $model->item_name, 'user_id' => $model->user_id]);
@@ -127,9 +127,9 @@ class AuthAssignmentController extends Controller
      * @return AuthAssignment the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($item_name, $user_id)
+    protected function findModel($user_id)
     {
-        if (($model = AuthAssignment::findOne(['item_name' => $item_name, 'user_id' => $user_id])) !== null) {
+        if (($model = AuthAssignment::findOne(['user_id' => $user_id])) !== null) {
             return $model;
         }
 
