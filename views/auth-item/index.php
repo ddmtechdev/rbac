@@ -17,7 +17,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="auth-item-index">
     <div class="container mt-3">
         <div class="">
-            <h5 class="mb-3"><i class="fas fa-user-cog"></i> <?= $this->title ?></h5>
+            <h5 class="mb-3"><?= $this->title ?></h5>
             <p>
                 <?= Html::a('+ Create Permission', ['create', 'role' => 2], ['class' => 'btn btn-success btn-sm']) ?>
                 <?= Html::a('+ Create Role', ['create', 'role' => 1], ['class' => 'btn btn-success btn-sm']) ?>
@@ -51,8 +51,8 @@ $this->params['breadcrumbs'][] = $this->title;
                                                     Actions
                                                 </button>
                                                 <ul class="dropdown-menu">
-                                                    <li>' . Html::a('<i class="fas fa-edit"></i> Edit', Url::to(['update', 'name' => $model->name]), ['class' => 'dropdown-item']) . '</li>
-                                                    <li>' . Html::a('<i class="fas fa-trash"></i> Delete', Url::to(['delete', 'name' => $model->name]), [
+                                                    <li>' . Html::a('Edit', Url::to(['update', 'name' => $model->name]), ['class' => 'dropdown-item']) . '</li>
+                                                    <li>' . Html::a('Delete', Url::to(['delete', 'name' => $model->name]), [
                                                         'class' => 'dropdown-item',
                                                         'data-confirm' => 'Are you sure you want to delete this item?',
                                                         'data-method' => 'post',
